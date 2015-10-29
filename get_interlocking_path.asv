@@ -1,0 +1,36 @@
+function [ interlocking ] = get_interlocking_path( optimal_path )
+%% %%%%%%%%%%%%%%%%%%%%%% get_interlocking_path %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% fonction : Function that will compute 
+%
+% %%%%%% usage %%%%%%
+% %% INPUTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  - picture      : The picture with the bricks on it (the brick must be in
+%                   grey/black to be detected as obstacles).
+%  - treshold     : The treshold used to detect obstacles. A low treshold
+%                   will lead in few obstacles detected as a high treshold
+%                   will lead in a lot of obstacles detected.
+%
+% %% OUTPUTS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  - interlocking : The interlocking (L_shortestpath/heigth)
+%  - Optimal_path : The path between the obstacles
+%
+%
+% %% AUTEUR : Martin HOFMANN : Deeply inspired from 
+% http://www.mathworks.com/matlabcentral/fileexchange/26248-a---a-star--search-for-path-planning-tutorial
+% By Paul PREMAKUMAR
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+leng=0;
+for i=1:length(optimal_path)-1
+    if optimal_path(i,1)==optimal_path(i+1,1) || optimal_path(i,2)==optimal_path(i+1,2)
+        leng=leng+1;
+    else 
+        leng=leng+sqrt(2);  
+    end
+end
+deltaH=max(optimal_path(:,1))-min(optimal_path(:,1));
+interlocking=leng/deltaH;
+
+
+end
+

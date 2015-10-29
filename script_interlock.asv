@@ -1,0 +1,18 @@
+clear all; 
+close all;
+clc;
+
+treshold=1;
+
+%%
+picture_name='X:\programmation_files\brick_masonry\testjpg.jpg';
+
+[masonry_picture,map]=imread(picture_name);
+
+masonry_picture=imshow(masonry_picture);
+
+pic_matrix=masonry_picture.CData/(max(max(masonry_picture.CData)));
+
+hold on;
+
+[interlocking_astar, Optimal_path]=get_interlocking_astar(pic_matrix,treshold);
